@@ -18,7 +18,6 @@ def main(exp_name, ent_wt=1.0):
     with tf.Session(config=get_session_config()) as sess:
         algo = TRPO(
             env=env,
-            sess=sess,
             policy=policy,
             n_itr=1500,
             batch_size=20000,
@@ -26,11 +25,10 @@ def main(exp_name, ent_wt=1.0):
             discount=0.99,
             store_paths=True,
             entropy_weight=ent_wt,
-            baseline=LinearFeatureBaseline(env_spec=env.spec),
-            exp_name=exp_name,
+            baseline=LinearFeatureBaseline(env_spec=env.spec)
         )
         with rllab_logdir(algo=algo, dirname='data/ant_data_collect/%s'%exp_name):
-            algo.train()
+            algo.train(sess=sess)
 
 if __name__ == "__main__":
     params_dict = {

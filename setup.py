@@ -13,7 +13,8 @@ setup(
         'envs': ['*.xml'],
     },
     install_requires=[
-        'rllab@git+https://github.com/shwang/rllab.git',
+        # 'rllab@git+https://github.com/shwang/rllab.git',
+        # just call pip install git+https://github.com/shwang/rllab.git
         'mujoco_py',
     ],
 

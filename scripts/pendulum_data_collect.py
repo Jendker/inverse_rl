@@ -13,7 +13,7 @@ def main():
         env=env,
         policy=policy,
         n_itr=200,
-        batch_size=1000,
+        batch_size=2000,
         max_path_length=100,
         discount=0.99,
         store_paths=True,

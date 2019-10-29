@@ -11,7 +11,7 @@ from airl.models.imitation_learning import GAIL
 from airl.utils.log_utils import rllab_logdir, load_latest_experts
 
 def main():
-    env = TfEnv(GymEnv('airl/Pendulum-v0', record_video=False, record_log=False))
+    env = TfEnv(GymEnv('Pendulum-v0', record_video=False, record_log=False))
     
     experts = load_latest_experts('data/pendulum', n=5)
 
