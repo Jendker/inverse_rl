@@ -32,6 +32,8 @@ def main(exp_name, ent_wt=1.0):
 
 if __name__ == "__main__":
     params_dict = {
-        'ent_wt': [0.1]
+        'ent_wt': 0.1,
+        'exp_name': 'test1'
     }
-    run_sweep_parallel(main, params_dict, repeat=4)
+    # run_sweep_parallel(main, params_dict, repeat=4)
+    main(**params_dict)

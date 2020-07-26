@@ -19,7 +19,7 @@ class AIRL(SingleTimestepIRL):
         score_discrim (bool): Use log D - log 1-D as reward (if true you should not need to use an entropy bonus)
         max_itrs (int): Number of training iterations to run per fit step.
     """
-    def __init__(self, env_spec,
+    def __init__(self, env,
                  expert_trajs=None,
                  reward_arch=relu_net,
                  reward_arch_args=None,
@@ -38,6 +38,7 @@ class AIRL(SingleTimestepIRL):
             self.fusion = RamFusionDistr(100, subsample_ratio=0.5)
         else:
             self.fusion = None
+        env_spec = env.spec
         self.dO = env_spec.observation_space.flat_dim
         self.dU = env_spec.action_space.flat_dim
         assert isinstance(env_spec.action_space, Box)
@@ -185,6 +186,7 @@ class AIRL(SingleTimestepIRL):
                                               feed_dict={self.act_t: acts, self.obs_t: obs,
                                                          self.nobs_t: obs_next,
                                                          self.lprobs: path_probs})
+            test1 = np.log(1 - scores)
             score = np.log(scores) - np.log(1-scores)
             score = score[:,0]
         else:

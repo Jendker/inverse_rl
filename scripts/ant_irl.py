@@ -17,7 +17,7 @@ def main(exp_name=None, fusion=False):
     # load ~2 iterations worth of data from each forward RL experiment as demos
     experts = load_latest_experts_multiple_runs('data/ant_data_collect', n=2)
 
-    irl_model = AIRL(env_spec=env.spec, expert_trajs=experts, state_only=True, fusion=fusion, max_itrs=10)
+    irl_model = AIRL(env=env, expert_trajs=experts, state_only=True, fusion=fusion, max_itrs=10)
 
     policy = GaussianMLPPolicy(name='policy', env_spec=env.spec, hidden_sizes=(32, 32))
     algo = IRLTRPO(
@@ -40,7 +40,8 @@ def main(exp_name=None, fusion=False):
 
 if __name__ == "__main__":
     params_dict = {
-        'fusion': [True]
+        'fusion': [True],
+        'exp_name': 'test1'
     }
-    run_sweep_parallel(main, params_dict, repeat=3)
-
+    # run_sweep_parallel(main, params_dict, repeat=3)
+    main(**params_dict)

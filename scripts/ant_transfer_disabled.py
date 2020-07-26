@@ -51,7 +51,8 @@ if __name__ == "__main__":
     import os
     params_folders = os.listdir(DATA_DIR)
     params_dict = {
-        'params_folder': params_folders,
+        'params_folder': params_folders[0],
+        'exp_name': 'test1'
     }
-    run_sweep_parallel(main, params_dict, repeat=3)
-
+    # run_sweep_parallel(main, params_dict, repeat=3)
+    main(**params_dict)
